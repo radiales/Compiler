@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/radiales/CLionProjects/finallexer/lex.h
+
+/home/radiales/CLionProjects/finallexer/lexframe.c
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+ctype.h
+-
+lex.h
+/home/radiales/CLionProjects/finallexer/lex.h
+

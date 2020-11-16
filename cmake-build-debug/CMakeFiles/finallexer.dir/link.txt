@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/finallexer.dir/lextest.c.o CMakeFiles/finallexer.dir/lexframe.c.o  -o finallexer 
