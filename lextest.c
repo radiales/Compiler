@@ -1,9 +1,9 @@
 /* Kevin Holz, s77179, 041/61/17 */
 #include <stdio.h>
 #include <ctype.h>
-//#include "code.h"
-
+#include "code.h"
 #include "lex.h"
+#include "parser.h"
 
 tMorph Morph = { (tMC)0 };
 
@@ -15,6 +15,9 @@ int main(int argc, void* argv[])
     {
         //Morph = *Lex();
         Lex();
+        if (pars(gProg)==1)puts("OK");
+        else printf("Syntaxerror near line %d col %d\n",Morph.PosLine+1,Morph.PosCol+1)
+        pars(gProg);
         printf("Line%4d, Col%3d: ", Morph.PosLine, Morph.PosCol);
         switch (Morph.MC)
         {

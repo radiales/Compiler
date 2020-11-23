@@ -5,5 +5,11 @@ CMakeFiles/finallexer.dir/lexframe.c.o
  /home/radiales/CLionProjects/finallexer/lex.h
  /home/radiales/CLionProjects/finallexer/lexframe.c
 CMakeFiles/finallexer.dir/lextest.c.o
+ /home/radiales/CLionProjects/finallexer/code.h
  /home/radiales/CLionProjects/finallexer/lex.h
  /home/radiales/CLionProjects/finallexer/lextest.c
+ /home/radiales/CLionProjects/finallexer/parser.h
+CMakeFiles/finallexer.dir/parser.c.o
+ /home/radiales/CLionProjects/finallexer/lex.h
+ /home/radiales/CLionProjects/finallexer/parser.c
+ /home/radiales/CLionProjects/finallexer/parser.h

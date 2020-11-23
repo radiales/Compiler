@@ -6,6 +6,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_C
   "/home/radiales/CLionProjects/finallexer/lexframe.c" "/home/radiales/CLionProjects/finallexer/cmake-build-debug/CMakeFiles/finallexer.dir/lexframe.c.o"
   "/home/radiales/CLionProjects/finallexer/lextest.c" "/home/radiales/CLionProjects/finallexer/cmake-build-debug/CMakeFiles/finallexer.dir/lextest.c.o"
+  "/home/radiales/CLionProjects/finallexer/parser.c" "/home/radiales/CLionProjects/finallexer/cmake-build-debug/CMakeFiles/finallexer.dir/parser.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")
 

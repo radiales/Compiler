@@ -8,15 +8,15 @@
 
 /home/radiales/CLionProjects/finallexer/lex.h
 
-/home/radiales/CLionProjects/finallexer/lexframe.c
-stdio.h
--
-stdlib.h
--
-string.h
--
-ctype.h
--
+/home/radiales/CLionProjects/finallexer/parser.c
 lex.h
 /home/radiales/CLionProjects/finallexer/lex.h
+parser.h
+/home/radiales/CLionProjects/finallexer/parser.h
+stdio.h
+/home/radiales/CLionProjects/finallexer/stdio.h
+stdlib.h
+/home/radiales/CLionProjects/finallexer/stdlib.h
+
+/home/radiales/CLionProjects/finallexer/parser.h
 

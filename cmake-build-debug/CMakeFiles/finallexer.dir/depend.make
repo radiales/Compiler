@@ -4,6 +4,12 @@
 CMakeFiles/finallexer.dir/lexframe.c.o: ../lex.h
 CMakeFiles/finallexer.dir/lexframe.c.o: ../lexframe.c
 
+CMakeFiles/finallexer.dir/lextest.c.o: ../code.h
 CMakeFiles/finallexer.dir/lextest.c.o: ../lex.h
 CMakeFiles/finallexer.dir/lextest.c.o: ../lextest.c
+CMakeFiles/finallexer.dir/lextest.c.o: ../parser.h
+
+CMakeFiles/finallexer.dir/parser.c.o: ../lex.h
+CMakeFiles/finallexer.dir/parser.c.o: ../parser.c
+CMakeFiles/finallexer.dir/parser.c.o: ../parser.h
 

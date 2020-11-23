@@ -88,6 +88,12 @@
 		<Unit filename="/home/radiales/CLionProjects/finallexer/lextest.c">
 			<Option target="finallexer"/>
 		</Unit>
+		<Unit filename="/home/radiales/CLionProjects/finallexer/parser.c">
+			<Option target="finallexer"/>
+		</Unit>
+		<Unit filename="/home/radiales/CLionProjects/finallexer/parser.h">
+			<Option target="finallexer"/>
+		</Unit>
 		<Unit filename="/home/radiales/CLionProjects/finallexer/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

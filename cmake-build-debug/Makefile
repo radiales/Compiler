@@ -197,6 +197,33 @@ lextest.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/finallexer.dir/build.make CMakeFiles/finallexer.dir/lextest.c.s
 .PHONY : lextest.c.s
 
+parser.o: parser.c.o
+
+.PHONY : parser.o
+
+# target to build an object file
+parser.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/finallexer.dir/build.make CMakeFiles/finallexer.dir/parser.c.o
+.PHONY : parser.c.o
+
+parser.i: parser.c.i
+
+.PHONY : parser.i
+
+# target to preprocess a source file
+parser.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/finallexer.dir/build.make CMakeFiles/finallexer.dir/parser.c.i
+.PHONY : parser.c.i
+
+parser.s: parser.c.s
+
+.PHONY : parser.s
+
+# target to generate assembly for a file
+parser.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/finallexer.dir/build.make CMakeFiles/finallexer.dir/parser.c.s
+.PHONY : parser.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -212,6 +239,9 @@ help:
 	@echo "... lextest.o"
 	@echo "... lextest.i"
 	@echo "... lextest.s"
+	@echo "... parser.o"
+	@echo "... parser.i"
+	@echo "... parser.s"
 .PHONY : help
 
 
