@@ -11,14 +11,16 @@ int main(int argc, void* argv[])
 {
     //initLex("/home/radiales/CLionProjects/finallexer/datei.pl0");
     initLex( (char*) argv[1] );
+    /*
     do
     {
+     */
         //Morph = *Lex();
         Lex();
         if (pars(gProg)==1)puts("OK");
-        else printf("Syntaxerror near line %d col %d\n",Morph.PosLine+1,Morph.PosCol+1)
-        pars(gProg);
-        printf("Line%4d, Col%3d: ", Morph.PosLine, Morph.PosCol);
+        else printf("Syntaxerror near line %d col %d\n",Morph.PosLine+1,Morph.PosCol+1);
+        //pars(gProg);
+        //printf("Line%4d, Col%3d: ", Morph.PosLine, Morph.PosCol);
         switch (Morph.MC)
         {
             case mcSymb:
@@ -40,13 +42,15 @@ int main(int argc, void* argv[])
                 if (isprint(Morph.Val.Symb))printf("Symbol,%c\n", (char)Morph.Val.Symb);
                 break;
             case mcNum:
-                printf("Zahl  ,%ld\n", Morph.Val.Num);
+                printf("Zahl  | %ld\n", Morph.Val.Num);
                 break;
             case mcIdent:
-                printf("Ident ,%s\n", (char*)Morph.Val.pStr);
+                printf("Ident | %s\n", (char*)Morph.Val.pStr);
                 break;
         }
+        /*
     } while (!(Morph.MC == mcSymb && Morph.Val.Symb == -1));
+         */
     puts("");
     return 0;
 }
