@@ -143,6 +143,33 @@ finallexer/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/finallexer.dir/build.make CMakeFiles/finallexer.dir/build
 .PHONY : finallexer/fast
 
+codegen.o: codegen.c.o
+
+.PHONY : codegen.o
+
+# target to build an object file
+codegen.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/finallexer.dir/build.make CMakeFiles/finallexer.dir/codegen.c.o
+.PHONY : codegen.c.o
+
+codegen.i: codegen.c.i
+
+.PHONY : codegen.i
+
+# target to preprocess a source file
+codegen.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/finallexer.dir/build.make CMakeFiles/finallexer.dir/codegen.c.i
+.PHONY : codegen.c.i
+
+codegen.s: codegen.c.s
+
+.PHONY : codegen.s
+
+# target to generate assembly for a file
+codegen.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/finallexer.dir/build.make CMakeFiles/finallexer.dir/codegen.c.s
+.PHONY : codegen.c.s
+
 lexframe.o: lexframe.c.o
 
 .PHONY : lexframe.o
@@ -197,6 +224,33 @@ lextest.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/finallexer.dir/build.make CMakeFiles/finallexer.dir/lextest.c.s
 .PHONY : lextest.c.s
 
+namensliste.o: namensliste.c.o
+
+.PHONY : namensliste.o
+
+# target to build an object file
+namensliste.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/finallexer.dir/build.make CMakeFiles/finallexer.dir/namensliste.c.o
+.PHONY : namensliste.c.o
+
+namensliste.i: namensliste.c.i
+
+.PHONY : namensliste.i
+
+# target to preprocess a source file
+namensliste.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/finallexer.dir/build.make CMakeFiles/finallexer.dir/namensliste.c.i
+.PHONY : namensliste.c.i
+
+namensliste.s: namensliste.c.s
+
+.PHONY : namensliste.s
+
+# target to generate assembly for a file
+namensliste.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/finallexer.dir/build.make CMakeFiles/finallexer.dir/namensliste.c.s
+.PHONY : namensliste.c.s
+
 parser.o: parser.c.o
 
 .PHONY : parser.o
@@ -233,12 +287,18 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... finallexer"
+	@echo "... codegen.o"
+	@echo "... codegen.i"
+	@echo "... codegen.s"
 	@echo "... lexframe.o"
 	@echo "... lexframe.i"
 	@echo "... lexframe.s"
 	@echo "... lextest.o"
 	@echo "... lextest.i"
 	@echo "... lextest.s"
+	@echo "... namensliste.o"
+	@echo "... namensliste.i"
+	@echo "... namensliste.s"
 	@echo "... parser.o"
 	@echo "... parser.i"
 	@echo "... parser.s"

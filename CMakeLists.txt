@@ -3,4 +3,4 @@ project(finallexer C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(finallexer lextest.c lexframe.c lex.h code.h parser.c parser.h)
+add_executable(finallexer lextest.c lexframe.c lex.h code.h parser.c parser.h namensliste.c namensliste.h codegen.c)

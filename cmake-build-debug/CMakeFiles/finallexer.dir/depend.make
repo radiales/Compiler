@@ -9,6 +9,9 @@ CMakeFiles/finallexer.dir/lextest.c.o: ../lex.h
 CMakeFiles/finallexer.dir/lextest.c.o: ../lextest.c
 CMakeFiles/finallexer.dir/lextest.c.o: ../parser.h
 
+CMakeFiles/finallexer.dir/namensliste.c.o: ../namensliste.c
+CMakeFiles/finallexer.dir/namensliste.c.o: ../namensliste.h
+
 CMakeFiles/finallexer.dir/parser.c.o: ../lex.h
 CMakeFiles/finallexer.dir/parser.c.o: ../parser.c
 CMakeFiles/finallexer.dir/parser.c.o: ../parser.h

@@ -4,8 +4,10 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
+  "/home/radiales/CLionProjects/finallexer/codegen.c" "/home/radiales/CLionProjects/finallexer/cmake-build-debug/CMakeFiles/finallexer.dir/codegen.c.o"
   "/home/radiales/CLionProjects/finallexer/lexframe.c" "/home/radiales/CLionProjects/finallexer/cmake-build-debug/CMakeFiles/finallexer.dir/lexframe.c.o"
   "/home/radiales/CLionProjects/finallexer/lextest.c" "/home/radiales/CLionProjects/finallexer/cmake-build-debug/CMakeFiles/finallexer.dir/lextest.c.o"
+  "/home/radiales/CLionProjects/finallexer/namensliste.c" "/home/radiales/CLionProjects/finallexer/cmake-build-debug/CMakeFiles/finallexer.dir/namensliste.c.o"
   "/home/radiales/CLionProjects/finallexer/parser.c" "/home/radiales/CLionProjects/finallexer/cmake-build-debug/CMakeFiles/finallexer.dir/parser.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")

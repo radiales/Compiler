@@ -4,18 +4,18 @@
 #include "code.h"
 #include "lex.h"
 #include "parser.h"
+#include "namensliste.h"
 
 tMorph Morph = { (tMC)0 };
+tBez* currentList;
+int constCounter = 0;
 
 int main(int argc, void* argv[])
 {
-    //initLex("/home/radiales/CLionProjects/finallexer/datei.pl0");
+    tBez initNameListEntry = {0,NULL,0,NULL,0,NULL};
+    currentList = &initNameListEntry;
+
     initLex( (char*) argv[1] );
-    /*
-    do
-    {
-     */
-        //Morph = *Lex();
         Lex();
         if (pars(gProg)==1)puts("OK");
         else printf("Syntaxerror near line %d col %d\n",Morph.PosLine+1,Morph.PosCol+1);
@@ -48,9 +48,6 @@ int main(int argc, void* argv[])
                 printf("Ident | %s\n", (char*)Morph.Val.pStr);
                 break;
         }
-        /*
-    } while (!(Morph.MC == mcSymb && Morph.Val.Symb == -1));
-         */
     puts("");
     return 0;
 }

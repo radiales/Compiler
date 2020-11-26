@@ -79,6 +79,9 @@
 		<Unit filename="/home/radiales/CLionProjects/finallexer/code.h">
 			<Option target="finallexer"/>
 		</Unit>
+		<Unit filename="/home/radiales/CLionProjects/finallexer/codegen.c">
+			<Option target="finallexer"/>
+		</Unit>
 		<Unit filename="/home/radiales/CLionProjects/finallexer/lex.h">
 			<Option target="finallexer"/>
 		</Unit>
@@ -86,6 +89,12 @@
 			<Option target="finallexer"/>
 		</Unit>
 		<Unit filename="/home/radiales/CLionProjects/finallexer/lextest.c">
+			<Option target="finallexer"/>
+		</Unit>
+		<Unit filename="/home/radiales/CLionProjects/finallexer/namensliste.c">
+			<Option target="finallexer"/>
+		</Unit>
+		<Unit filename="/home/radiales/CLionProjects/finallexer/namensliste.h">
 			<Option target="finallexer"/>
 		</Unit>
 		<Unit filename="/home/radiales/CLionProjects/finallexer/parser.c">
