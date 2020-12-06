@@ -1,3 +1,4 @@
+const z=20,u=16;
 var a,b,Max;
 procedure p1;
 begin

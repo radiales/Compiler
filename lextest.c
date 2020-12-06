@@ -8,19 +8,26 @@
 
 tMorph Morph = { (tMC)0 };
 tBez* currentList;
-int constCounter = 0;
+long* constblock = NULL;
+FILE* pOFile;
+
 
 int main(int argc, void* argv[])
 {
     tBez initNameListEntry = {0,NULL,0,NULL,0,NULL};
     currentList = &initNameListEntry;
+    tProc rootproc = {0,0,NULL,NULL,0};
+    pOFile = fopen("output.cl0","w+");
+    newProg();
+
+
+
+
 
     initLex( (char*) argv[1] );
         Lex();
         if (pars(gProg)==1)puts("OK");
         else printf("Syntaxerror near line %d col %d\n",Morph.PosLine+1,Morph.PosCol+1);
-        //pars(gProg);
-        //printf("Line%4d, Col%3d: ", Morph.PosLine, Morph.PosCol);
         switch (Morph.MC)
         {
             case mcSymb:

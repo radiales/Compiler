@@ -193,9 +193,6 @@ static void fslb(void)
     fsl(); fb();
 };
 
-//typedef void (*FX)(void);
-
-//static FX vfx[] = { fl,fb,fgl,fsl,fslb };
 
 void startFunction(int f) {
 

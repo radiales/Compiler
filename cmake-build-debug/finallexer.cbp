@@ -82,6 +82,9 @@
 		<Unit filename="/home/radiales/CLionProjects/finallexer/codegen.c">
 			<Option target="finallexer"/>
 		</Unit>
+		<Unit filename="/home/radiales/CLionProjects/finallexer/codegen.h">
+			<Option target="finallexer"/>
+		</Unit>
 		<Unit filename="/home/radiales/CLionProjects/finallexer/lex.h">
 			<Option target="finallexer"/>
 		</Unit>

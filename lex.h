@@ -42,5 +42,3 @@ typedef struct
 int initLex(char* fname);
 
 extern tMorph* Lex(void);
-
-//tMorph Morph = { (tMC)0 };

@@ -1,43 +1,131 @@
-//
-// Created by radiales on 26.11.20.
-//
+/* Kevin Holz, s77179, 041/61/17 */
+
+#include "codegen.h"
 #include "lex.h"
 #include "namensliste.h"
+#include "codegen.h"
 #include <string.h>
 
 
 extern tMorph Morph;
 extern tBez* currentList;
 extern int constCounter;
+extern long* constblock;
+extern FILE* pOFile;
 
-int st1()
-{
+int st1(){
+    tBez* tmp = SearchGlobal(Morph.Val.pStr);
 
-    tBez* tmp;
-    if (suche(Morph) != NULL)
-    {
-        printf("ST1 Bezeichner schon Vorhanden\n");
-        exit(1);
+    if(tmp == NOTFOUND){
+        printf("Identifier %s not found (line: %d)\n", Morph.Val.pStr, Morph.PosLine);
+        exit(FAIL);
     }
 
-    currentList->nxt = malloc(sizeof(tBez));    // iRGENDWAS MIT HEAP
-    currentList->nxt->pName = Morph.Val.pStr;
-    currentList->nxt->IdxProc = currentList->IdxProc;
-    currentList->nxt->Kz = currentList->Kz+1;
-    currentList->nxt->Len = strlen(currentList->pName);
-    tConst* ttmp = malloc(sizeof(struct tCONST));
-    currentList->nxt->pObj = ttmp;
-    ttmp->Kz = 0;
-    ttmp->Idx = constCounter++;
+    if(tmp->Kz != KzVar){
+        printf("Identifier %s is a procedure or constant, needed: variable (line: %d)\n", Morph.Val.pStr, Morph.PosLine);
+        exit(FAIL);
+    }
 
+    return 1;
 }
 
-int st2()
-{
+int st2(){
+    tBez* tmp = SearchGlobal(Morph.Val.pStr);
 
+    if(tmp == NOTFOUND){
+        printf("Identifier %s not found (line: %d)\n", Morph.Val.pStr, Morph.PosLine);
+        exit(FAIL);
+    }
+
+    if(tmp->Kz != KzProc){
+        printf("Identifier %s is a variable or constant, needed: procedure (line: %d)\n", Morph.Val.pStr, Morph.PosLine);
+        exit(FAIL);
+    }
+
+    return 1;
 }
 
-int st3()
-{
+int st3(){
 
+    tBez* tmp = SearchGlobal(Morph.Val.pStr);
+
+    if(tmp == NOTFOUND){
+        printf("Identifier %s not found (line: %d)\n", Morph.Val.pStr, Morph.PosLine);
+        exit(FAIL);
+    }
+
+    if(tmp->Kz != KzVar){
+        printf("Identifier %s is a procedure or constant, needed: variable (line: %d)\n", Morph.Val.pStr, Morph.PosLine);
+        exit(FAIL);
+    }
+
+    return 1;
+}
+
+int bl1()
+        {
+        NewConstBez(NULL);
+        return 1;
+        };
+
+int bl2()
+{
+    NewConst();
+    return 1;
+}
+
+int bl3(){
+    NewVar();
+    return 1;
+}
+
+int bl4(){
+    newProc();
+    return 1;
+}
+
+int bl5(){
+    FreeDescriptions();
+    return 1;
+}
+
+int bl6(){
+
+    return 1;
+}
+
+int fa1(){
+    tBez* tmp = SearchByVal(Morph.Val.Num);
+
+    char name[1024];
+    sprintf(name, "c%ld", Morph.Val.Num);
+
+    if(tmp == NOTFOUND){
+        NewConstBez(name);
+        NewConst();
+        tmp = procList->pLBez;
+    }
+    return 1;
+}
+
+int fa2(){
+    tBez* bez = SearchGlobal(Morph.Val.pStr);
+
+    if(bez == NOTFOUND){
+        printf("Identifier %s not found (line: %d)\n", Morph.Val.pStr, Morph.PosLine + 1);
+        exit(FAIL);
+    } else if(bez->Kz == KzProc){
+        printf("Identifier %s is a procedure, needed: variable or constant (line: %d)\n", Morph.Val.pStr, Morph.PosLine + 1);
+        exit(FAIL);
+    }
+
+    return 1;
+}
+
+int pr1(){
+
+    fseek(pOFile, 0, SEEK_END);
+    fwrite(constblock, sizeof(long), constCounter, pOFile);
+
+    return 1;
 }

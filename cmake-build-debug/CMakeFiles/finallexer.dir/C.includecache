@@ -6,13 +6,17 @@
 
 #IncludeRegexTransform: 
 
+/home/radiales/CLionProjects/finallexer/codegen.h
+
 /home/radiales/CLionProjects/finallexer/lex.h
 
-/home/radiales/CLionProjects/finallexer/namensliste.c
-namensliste.h
 /home/radiales/CLionProjects/finallexer/namensliste.h
-
-/home/radiales/CLionProjects/finallexer/namensliste.h
+stdio.h
+/home/radiales/CLionProjects/finallexer/stdio.h
+stdlib.h
+/home/radiales/CLionProjects/finallexer/stdlib.h
+lex.h
+/home/radiales/CLionProjects/finallexer/lex.h
 
 /home/radiales/CLionProjects/finallexer/parser.c
 lex.h
@@ -23,6 +27,10 @@ stdio.h
 /home/radiales/CLionProjects/finallexer/stdio.h
 stdlib.h
 /home/radiales/CLionProjects/finallexer/stdlib.h
+namensliste.h
+/home/radiales/CLionProjects/finallexer/namensliste.h
+codegen.h
+/home/radiales/CLionProjects/finallexer/codegen.h
 
 /home/radiales/CLionProjects/finallexer/parser.h
 
