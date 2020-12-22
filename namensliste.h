@@ -36,7 +36,7 @@ typedef struct tVAR
 typedef struct tCONST
 {
     tKz Kz;
-    long Val;
+    int Val;
     int Idx;
 }tConst;
 
@@ -53,7 +53,7 @@ tProc* root;
 tProc* procList;
 tBez* suche();
 tVar* CreateVar(void);
-tConst* createConst(long Val);
+tConst* createConst(int Val);
 tBez* createBez(char* pBez);
 tProc* createProc(tProc* pParent);
 tBez* Search(char* name);

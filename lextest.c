@@ -8,8 +8,9 @@
 
 tMorph Morph = { (tMC)0 };
 tBez* currentList;
-long* constblock = NULL;
+int* constblock = NULL;
 FILE* pOFile;
+int placeholder = 0;
 
 
 int main(int argc, void* argv[])
@@ -18,6 +19,7 @@ int main(int argc, void* argv[])
     currentList = &initNameListEntry;
     tProc rootproc = {0,0,NULL,NULL,0};
     pOFile = fopen("output.cl0","w+");
+    fwrite(&placeholder,sizeof(int),1,pOFile);
     newProg();
 
 

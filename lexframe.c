@@ -54,7 +54,7 @@ static char vZKl[128] =
 /*---------------------------------------------------------*/
 /* 0*/{7, 7, 7, 7, 7, 7, 7, 7, 7 ,7 ,7 ,7 ,7 ,7 ,7 ,7,/*15*/
 /*16*/ 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7,/*31*/
-/*32*/ 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,/*47*/
+/*32*/ 7, 0, 0, 0, 0, 0, 0, 0, 8, 9,10, 0, 0, 0, 0, 0,/*47*/
 /*48*/ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 0, 5, 4, 6, 0,/*63*/
 /*64*/ 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,/*79*/
 /*80*/ 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0,/*95*/
@@ -71,24 +71,47 @@ static char vZKl[128] =
  * 5 == '<'
  * 6 == '>'
  * 7 == Müll
+ * 8 == '('
+ * 9 == ')'
+ * 10== '*'
  */
 
 /* Automatentabelle */
 
 
+////vSMatrix[Zustand][Gelesenes Zeichen] [nähster Zustand, Funktion]
+//tState vSMatrix[9][8][2] ={
+///*          So           Zi          Bu            ':'           '='           '<'          '>'           Space
+///*-----------------------------------------------------------------------------------------------------------------*/
+///* Z0 */ {{9 , ifslb}, {1 , ifsl},  {2 , ifgl},   {3, ifsl},   {9, ifslb },   {4, ifsl},    {5, ifsl},    {0, ifl}} ,
+///* Z1 */ {{9 , ifb},   {1 , ifsl},  {9 , ifb},    {9, ifb},    {9, ifb},      {9, ifb},     {9, ifb},     {9, ifb}} ,
+///* Z2 */ {{9 , ifb},   {2 , ifsl},  {2 , ifgl},   {9 , ifb},   {9 , ifb},     {9 , ifb},    {9 , ifb},    {9 , ifb}} ,
+///* Z3 */ {{9 , ifb},   {9 , ifb},   {9 , ifb},    {9 , ifb},   {6 , ifsl},    {9 , ifb},    {9 , ifb},    {9 , ifb}} ,
+///* Z4 */ {{9 , ifb},   {9 , ifb},   {9 , ifb},    {9 , ifb},   {7 , ifsl},    {9 , ifb},    {9 , ifb},    {9 , ifb}} ,
+///* Z5 */ {{9 , ifb},   {9 , ifb},   {9 , ifb},    {9 , ifb},   {8 , ifsl},    {9 , ifb},    {9 , ifb},    {9 , ifb}} ,
+///* Z6 */ {{9 , ifb},   {9 , ifb},   {9 , ifb},    {9 , ifb},   {9 , ifb},     {9 , ifb},    {9 , ifb},    {9 , ifb}} ,
+///* Z7 */ {{9 , ifb},   {9 , ifb},   {9 , ifb},    {9 , ifb},   {9 , ifb},     {9 , ifb},    {9 , ifb},    {9 , ifb}} ,
+///* Z8 */ {{9 , ifb},   {9 , ifb},   {9 , ifb},    {9 , ifb},   {9 , ifb},     {9 , ifb},    {9 , ifb},    {9 , ifb}}
+//};
+
+
 //vSMatrix[Zustand][Gelesenes Zeichen] [nähster Zustand, Funktion]
-tState vSMatrix[9][8][2] ={
-/*          So           Zi          Bu            ':'           '='           '<'          '>'           Space
-/*-----------------------------------------------------------------------------------------------------------------*/
-/* Z0 */ {{9 , ifslb}, {1 , ifsl},  {2 , ifgl},   {3, ifsl},   {9, ifslb },   {4, ifsl},    {5, ifsl},    {0, ifl}} ,
-/* Z1 */ {{9 , ifb},   {1 , ifsl},  {9 , ifb},    {9, ifb},    {9, ifb},      {9, ifb},     {9, ifb},     {9, ifb}} ,
-/* Z2 */ {{9 , ifb},   {2 , ifsl},  {2 , ifgl},   {9 , ifb},   {9 , ifb},     {9 , ifb},    {9 , ifb},    {9 , ifb}} ,
-/* Z3 */ {{9 , ifb},   {9 , ifb},   {9 , ifb},    {9 , ifb},   {6 , ifsl},    {9 , ifb},    {9 , ifb},    {9 , ifb}} ,
-/* Z4 */ {{9 , ifb},   {9 , ifb},   {9 , ifb},    {9 , ifb},   {7 , ifsl},    {9 , ifb},    {9 , ifb},    {9 , ifb}} ,
-/* Z5 */ {{9 , ifb},   {9 , ifb},   {9 , ifb},    {9 , ifb},   {8 , ifsl},    {9 , ifb},    {9 , ifb},    {9 , ifb}} ,
-/* Z6 */ {{9 , ifb},   {9 , ifb},   {9 , ifb},    {9 , ifb},   {9 , ifb},     {9 , ifb},    {9 , ifb},    {9 , ifb}} ,
-/* Z7 */ {{9 , ifb},   {9 , ifb},   {9 , ifb},    {9 , ifb},   {9 , ifb},     {9 , ifb},    {9 , ifb},    {9 , ifb}} ,
-/* Z8 */ {{9 , ifb},   {9 , ifb},   {9 , ifb},    {9 , ifb},   {9 , ifb},     {9 , ifb},    {9 , ifb},    {9 , ifb}}
+tState vSMatrix[13][11][2] ={
+/*          So           Zi          Bu            ':'           '='           '<'          '>'           Space      |    '('             ')'         *
+/*--------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* Z0 */ {{12 , ifslb}, {1 , ifsl},  {2 , ifgl},   {3, ifsl},   {12, ifslb },  {4, ifsl},   {5, ifsl},     {0, ifl}   ,{9, ifsl} ,   {12, ifslb},  {12, ifslb}}, // '('
+/* Z1 */ {{12 , ifb},   {1 , ifsl},  {12 , ifb},   {12, ifb},   {12, ifb},     {12, ifb},   {12, ifb},     {12, ifb}  ,{12 , ifb},  {12 , ifb},   {12 , ifb}},
+/* Z2 */ {{12 , ifb},   {2 , ifsl},  {2 , ifgl},   {12 , ifb},  {12 , ifb},    {12 , ifb},  {12 , ifb},    {12 , ifb} ,{12 , ifb},  {12 , ifb},   {12 , ifb}},
+/* Z3 */ {{12 , ifb},   {12 , ifb},  {12 , ifb},   {12 , ifb},  {6 , ifsl},    {12 , ifb},  {12 , ifb},    {12 , ifb} ,{12 , ifb},  {12 , ifb},   {12 , ifb}},
+/* Z4 */ {{12 , ifb},   {12 , ifb},  {12 , ifb},   {12 , ifb},  {7 , ifsl},    {12 , ifb},  {12 , ifb},    {12 , ifb} ,{12 , ifb},  {12 , ifb},   {12 , ifb}},
+/* Z5 */ {{12 , ifb},   {12 , ifb},  {12 , ifb},   {12 , ifb},  {8 , ifsl},    {12 , ifb},  {12 , ifb},    {12 , ifb} ,{12 , ifb},  {12 , ifb},   {12 , ifb}},
+/* Z6 */ {{12 , ifb},   {12 , ifb},  {12 , ifb},   {12 , ifb},  {12 , ifb},    {12 , ifb},  {12 , ifb},    {12 , ifb} ,{12 , ifb},  {12 , ifb},   {12 , ifb}},
+/* Z7 */ {{12 , ifb},   {12 , ifb},  {12 , ifb},   {12 , ifb},  {12 , ifb},    {12 , ifb},  {12 , ifb},    {12 , ifb} ,{12 , ifb},  {12 , ifb},   {12 , ifb}},
+/* Z8 */ {{12 , ifb},   {12 , ifb},  {12 , ifb},   {12 , ifb},  {12 , ifb},    {12 , ifb},  {12 , ifb},    {12 , ifb} ,{12 , ifb},  {12 , ifb},   {12 , ifb}},
+/* Z9 */ {{12 , ifb},   {12 , ifb},  {12 , ifb},   {12 , ifb},  {12 , ifb},    {12 , ifb},  {12 , ifb},    {12 , ifb} ,{12 , ifb},  {12 , ifb},   {10,ifel}},
+/*Z10 */ {{10, ifl},    {10, ifl},   {10, ifl},    {10, ifl},   {10, ifl},     {10, ifl},   {10, ifl},     {10, ifl}  ,{10,ifl},    {10, ifl} ,   {11,ifl}},
+/*Z11 */ {{10, ifl},    {10, ifl},   {10, ifl},    {10, ifl},   {10, ifl},     {10, ifl},   {10, ifl},     {10, ifl}  ,{10,ifl},    {0, ifl}  ,   {12,ifl}}
+
 };
 
 /*
@@ -139,6 +162,7 @@ static void fb(void)
         case 3: // :
         case 4: // <
         case 5: // >
+        case 9: // (
         case 0:Morph.Val.Symb = vBuf[0];
             Morph.MC = mcSymb;
             break;
@@ -170,6 +194,10 @@ static void fb(void)
         case 8:Morph.Val.Symb = (long)zGE;
             Morph.MC = mcSymb;
             break;
+        case 10: Morph.MC = mcEmpty; // *
+        case 11: // )
+            break;
+
 
     }
     Ende = 1; // entfällt bei Variante mit Zustand zEnd
@@ -193,6 +221,12 @@ static void fslb(void)
     fsl(); fb();
 };
 
+static void fel(void){ // Um das klammer zu zu flushen da es sonst zu fehlern kommmt
+    pBuf--;
+    *pBuf = 0;
+    fl();
+}
+
 
 void startFunction(int f) {
 
@@ -203,6 +237,7 @@ void startFunction(int f) {
         case ifgl: fgl(); break;
         case ifsl: fsl(); break;
         case ifslb: fslb(); break;
+        case ifel: fel(); break;
     }
 
 }
@@ -226,6 +261,6 @@ tMorph* Lex(void)
         startFunction(vSMatrix[Z][vZKl[X & 0x7f]][0].Funk);
         Z = zx;
 
-    } while (Z != 9); // (Z!=zEnd) // zEnd:9
+    } while (Z != 12); // (Z!=zEnd) // zEnd:9
     return &Morph;
 }

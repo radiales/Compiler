@@ -6,7 +6,7 @@ int constCounter = 0;
 extern tBez* currentList;
 extern tMorph Morph;
 int procCounter = 0;
-extern long* constblock;
+extern int* constblock;
 tProc* procList;
 
 
@@ -22,7 +22,7 @@ tVar* CreateVar(void)
     return newVar;
 }
 
-tConst* createConst(long Val)
+tConst* createConst(int Val)
 {
     tConst* newConst = (tConst*)malloc(sizeof(tConst));
 
@@ -31,7 +31,7 @@ tConst* createConst(long Val)
     newConst->Idx = constCounter++;
 
     //Not sure if correct
-    void* ret = realloc(constblock, sizeof(long) * constCounter);
+    void* ret = realloc(constblock, sizeof(int) * constCounter);
     if(ret == NULL) printf("Realloc in const-Creation failed\n");
     constblock = ret;
     constblock[constCounter-1] = Val;
@@ -104,6 +104,7 @@ tBez* SearchGlobal(char* name)
 
     return tmp;
 }
+
 
 tBez* SearchByVal(int val)
 {

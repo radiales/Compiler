@@ -1,5 +1,4 @@
 var a,fac;
-
 Procedure p1;
  var b,c;
  begin
@@ -11,6 +10,7 @@ Procedure p1;
   fac := fac*b;
   !fac
  end;
+ (*Hollas ist mein Baba*)
 
 begin
   ?a;

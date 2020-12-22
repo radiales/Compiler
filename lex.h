@@ -7,7 +7,7 @@
 
 #pragma once
 
-typedef enum T_Fx { ifl , ifb, ifgl, ifsl, ifslb } tFx;
+typedef enum T_Fx { ifl , ifb, ifgl, ifsl, ifslb, ifel } tFx;
 
 /* Morphemcodes */
 typedef enum T_MC { mcEmpty, mcSymb, mcNum, mcIdent, mcStrng } tMC;

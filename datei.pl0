@@ -1,5 +1,5 @@
 const z=20,u=16;
-var a,b,Max;
+var a,b,Max;(*H*)
 procedure p1;
 begin
   if a>=b then Max:=a;
