@@ -46,7 +46,8 @@ int main(int argc, void* argv[])
                 if (Morph.Val.Symb == zPRC)   printf("Symbol,_PROCEDURE\n"); else
                 if (Morph.Val.Symb == zTHN)   printf("Symbol,_THEN\n"); else
                 if (Morph.Val.Symb == zVAR)   printf("Symbol,_VAR\n");  else
-                if (Morph.Val.Symb == zWHL)   printf("Symbol,_WHILE\n");
+                if (Morph.Val.Symb == zWHL)   printf("Symbol,_WHILE\n"); else
+                if (Morph.Val.Symb == zELS)   printf("Symbol,_ELS\n");
 
                 if (isprint(Morph.Val.Symb))printf("Symbol,%c\n", (char)Morph.Val.Symb);
                 break;

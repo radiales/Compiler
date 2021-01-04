@@ -18,7 +18,7 @@ static int Ende;                    // Entfällt, wenn Zustand 9 → Ende
 
 const char* Keyw[] = {                                                      // Die Keywords von pl0
         ":=", "<=" , ">=","BEGIN","CALL","CONST","DO","END","IF","ODD",
-        "PROCEDURE","THEN","VAR","WHILE"
+        "PROCEDURE","THEN","VAR","WHILE","ELSE"
 };
 int kn = sizeof(Keyw)/sizeof(char*);                                        // Berechnet die Größe des Arrays
 
@@ -124,8 +124,18 @@ Lesen                           void fl(void);
 
 
 //Liefert Index, falls gefunden, sonst -1
+
+int findWord(char* val, const char** keyw, int length){
+    for(int i = 0; i < length; i++){
+        if(strcmp(val, keyw[i]) == 0) return i;
+    }
+    return -1;
+}
+
+/*
 int binary_search(const char** M, int n, const char* X) //(Array mit Schlüsselwörtern, Anzahl Schlüsselwörter, Gesuchter Wert)
 {
+
     unsigned mitte;
     unsigned links = 0;                                 // Mann beginnt mit dem kleinsten Index
     unsigned rechts = n - 1;
@@ -143,7 +153,9 @@ int binary_search(const char** M, int n, const char* X) //(Array mit Schlüsselw
         n = (n) / 2;
     } while (bool != 0);
     return ret;
+
 }
+*/
 
 /* Ausgabefunktionen des Automaten */
 static void fl(void)
@@ -171,7 +183,8 @@ static void fb(void)
             Morph.MC = mcNum;
             break;
 
-        case 2: i = binary_search(Keyw, kn, vBuf);
+            //case 2: i = binary_search(Keyw, kn, vBuf);
+        case 2: i = findWord(vBuf, Keyw, kn);
             if (i >= 0) {
                 Morph.MC = mcSymb;
                 Morph.Val.Symb = i + 128;                   //mit 128 beginnt in tZS das zERG

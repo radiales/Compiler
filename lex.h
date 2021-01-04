@@ -16,7 +16,7 @@ typedef enum T_ZS
 {
     zNIL,
     zERG = 128, zLE, zGE,
-    zBGN, zCLL, zCST, zDO, zEND, zIF, zODD, zPRC, zTHN, zVAR, zWHL
+    zBGN, zCLL, zCST, zDO, zEND, zIF, zODD, zPRC, zTHN, zVAR, zWHL, zELS
 }tZS;
 
 typedef struct

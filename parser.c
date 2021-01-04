@@ -30,7 +30,7 @@ tBog gStatement[] = {
 /* 3  */ {BgSy, {(ul)zIF	                }, NULL, 4,		7},
 /* 4  */ {BgGr, {(ul)gCondition	            }, &st3, 5,		0},
 /* 5  */ {BgSy, {(ul)zTHN	                }, NULL, 6,		0},
-/* 6  */ {BgGr, {(ul)gStatement	            }, &st4,22,		0},
+/* 6  */ {BgGr, {(ul)gStatement	            }, &st4,23,		0},
 /* 7  */ {BgSy, {(ul)zWHL	                }, &st5, 8,	   11},
 /* 8  */ {BgGr, {(ul)gCondition	            }, &st6, 9,		0},
 /* 9  */ {BgSy, {(ul)zDO	                }, NULL,10,		0},
@@ -48,8 +48,42 @@ tBog gStatement[] = {
 /* 19 */ {BgSy, {(ul)'!'	                }, NULL,20,	   21},
 /* 20 */ {BgGr, {(ul)gExpression	        }, &st10,22,	0},
 /* 21 */ {BgNl, {(ul)0		                }, NULL,22,		0},
-/* 22 */ {BgEn, {(ul)0		                }, NULL, 0,		0}
+    /* 22 */ {BgEn, {(ul)0		                }, NULL, 0,		0},
+/* 23 */ {BgSy, {(ul)zELS		                }, &st11, 24,		22},
+/* 24 */ {BgGr, {(ul)gStatement		                }, &st12, 22,		0}
 };
+
+
+//tBog gStatement[] = {
+///* 0  */ {BgMo, {(ul)mcIdent               }, &st1, 1,		3},
+/////* 0  */ {BgMo, {(ul)mcIdent               }, NULL, 1,		3},
+///* 1  */ {BgSy, {(ul)zERG	                }, NULL, 2,		0},
+///* 2  */ {BgGr, {(ul)gExpression	           }, &st2,24,		0},
+///* 3  */ {BgSy, {(ul)zIF	                }, NULL, 4,		7},
+///* 4  */ {BgGr, {(ul)gCondition	            }, &st3, 5,		0},
+///* 5  */ {BgSy, {(ul)zTHN	                }, NULL, 6,		0},
+///* 6  */ {BgGr, {(ul)gStatement	            }, &st4,23,		0},
+///* 7  */ {BgSy, {(ul)zWHL	                }, &st5, 8,	   11},
+///* 8  */ {BgGr, {(ul)gCondition	            }, &st6, 9,		0},
+///* 9  */ {BgSy, {(ul)zDO	                }, NULL,10,		0},
+///* 10 */ {BgGr, {(ul)gStatement	            }, &st7,24,		0},
+///* 11 */ {BgSy, {(ul)zBGN	                }, NULL,12,	   15},
+///* 12 */ {BgGr, {(ul)gStatement	            }, NULL,13,	    0},
+///* 13 */ {BgSy, {(ul)zEND	                }, NULL,24,	   14},
+///* 14 */ {BgSy, {(ul)';'	                }, NULL,12,		0},
+///* 15 */ {BgSy, {(ul)zCLL	                }, NULL,16,	   17},
+///* 16 */ {BgMo, {(ul)mcIdent                }, &st8,24,		0},
+//    ///* 16 */ {BgMo, {(ul)mcIdent                }, NULL,22,		0},
+///* 17 */ {BgSy, {(ul)'?'	                }, NULL,18,	   19},
+///* 18 */ {BgMo, {(ul)mcIdent                }, &st9,24,		0},
+//    ///* 18 */ {BgMo, {(ul)mcIdent                }, NULL,22,		0},
+///* 19 */ {BgSy, {(ul)'!'	                }, NULL,20,	   21},
+///* 20 */ {BgGr, {(ul)gExpression	        }, &st10,24,	0},
+///* 21 */ {BgNl, {(ul)0		                }, NULL,24,		0},
+//    /* 22 */ {BgSy, {(ul)zELS		                }, NULL, 23,		24},
+///* 23 */ {BgGr, {(ul)gStatement		                }, NULL, 24,		0},
+///* 24 */ {BgEn, {(ul)0		                }, NULL, 0,		0},
+//};
 
 tBog gBlock[]=
         {
@@ -138,7 +172,7 @@ char* graphNames[] = {
 
 tBog* endStates[] = {
         gProg,           &(gProg[2]),      gBlock,         &(gBlock[19]),
-        gStatement,      &(gStatement[22]),gExpression,    &(gExpression[8]),
+        gStatement,      &(gStatement[24]),gExpression,    &(gExpression[8]),
         gTerm,           &(gTerm[6]),      gFact,          &(gFact[5]),
         gCondition,      &(gCondition[10])
 };
@@ -164,6 +198,9 @@ int pars(tBog* pGraph) {
     depth++;
     if (Morph.MC == mcEmpty) Lex();
     while (1) {
+        if (pBog == &gStatement[23]){
+            printf("Hallo Welt!\n");
+        }
 
 //        if (pGraph == gProg) printf("Programm\n");
 //        if (pGraph == gBlock) printf("Block\n");

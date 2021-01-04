@@ -9,6 +9,8 @@
 
 #define VCODE_DEFAULT_LEN 1024
 
+long lastjnot;
+long lastjnotparameter;
 FILE* pOFile;
 int IdxProc;
 char* pCode;
@@ -251,7 +253,8 @@ int st4(){
     LabelList = nxt;
 
     wr2ToCodeAtP((short)(pCode - target - 2), (char*)target);
-
+    lastjnot = target;
+    lastjnotparameter = (short)(pCode - target - 2);
     return 1;
 }
 
@@ -344,6 +347,34 @@ int st9(){ // TODO: reevaluate
 
 int st10(){
     code(putVal);
+
+    return 1;
+}
+
+int st11(){
+    code(jmp,0);
+
+    tLabl* newLabel = (tLabl*)malloc(sizeof(tLabl));
+
+    newLabel->nxt = LabelList;
+    newLabel->iJmp = (long)((void*)(pCode) - 2  );
+    LabelList = newLabel;
+
+    return 1;
+}
+
+int st12(){
+
+    tLabl* nxt = LabelList->nxt;
+    long target = (long)(LabelList->iJmp);
+
+    free(LabelList);
+    LabelList = nxt;
+
+    wr2ToCodeAtP((short)(pCode - target - 2), (char*)target);
+
+    wr2ToCodeAtP((short)(lastjnotparameter + 3), (char*)lastjnot);
+
 
     return 1;
 }
