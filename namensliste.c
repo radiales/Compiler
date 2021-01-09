@@ -95,9 +95,10 @@ tBez* SearchGlobal(char* name)
 
     do{
         tmp = Search(name);
+        isRoot = (procList == root);
         if(isRoot) break;
         procList = procList->pParent;
-        isRoot = (procList == root);
+        //isRoot = (procList == root);
     }while(tmp == NOTFOUND);
 
     procList = procListCopy;

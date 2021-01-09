@@ -155,10 +155,10 @@ tBog gTerm[]=
         {
 /*0*/ {BgGr,{(ul)gFact          }, NULL, 1 ,0},
 /*1*/ {BgNl,{(ul)0       }, NULL, 2 ,0},
-/*2*/ {BgSy,{(ul)'*'     }, &te1, 3 ,4},
-/*3*/ {BgGr,{(ul)gFact          }, &te2, 1 ,0},
+/*2*/ {BgSy,{(ul)'*'     }, NULL, 3 ,4},
+/*3*/ {BgGr,{(ul)gFact          }, &te1, 1 ,0},
 /*4*/ {BgSy,{(ul)'/'     }, NULL, 5 ,0},
-/*5*/ {BgGr,{(ul)gFact          }, NULL, 1 ,0},
+/*5*/ {BgGr,{(ul)gFact          }, &te2, 1 ,0},
 /*6*/ {BgEn,{(ul)0       }, NULL, 0 ,0},
 
         };
