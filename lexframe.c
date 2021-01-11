@@ -20,33 +20,26 @@ const char* Keyw[] = {                                                      // D
         ":=", "<=" , ">=","BEGIN","CALL","CONST","DO","END","IF","ODD",
         "PROCEDURE","THEN","VAR","WHILE","ELSE"
 };
+// Else als Keyword hinzugefügt
 int kn = sizeof(Keyw)/sizeof(char*);                                        // Berechnet die Größe des Arrays
 
 /*---- Initialisierung der lexiaklischen Analyse ----*/
 
 int initLex(char* fname)
 {
-/*
-    pIF=fopen(fname,"r+t");
-    if (pIF) X=fgetc(pIF);
-    Morph.MC=mcEmpty;
-    return (int)pIF;
-*/
-
     char vName[128 + 1];
     strcpy(vName, fname);
     if (strstr(vName, ".pl0") == NULL) strcat(vName, ".pl0");
     pIF = fopen(vName, "r+t");
     if (pIF != NULL) { X = fgetc(pIF); return 0; }
     return -1;
-
 }
 
 
 
 
 
-/* Zeichenklassenvector */                                                     //Wandelt eine EIngabe in Ascii um und in dieser Tabelle ist dann eine Kategoriesierung dazu
+/* Zeichenklassenvector */   //Wandelt eine EIngabe in Ascii um und in dieser Tabelle ist dann eine Kategoriesierung dazu
 
 //
 static char vZKl[128] =
@@ -61,7 +54,7 @@ static char vZKl[128] =
 /*96*/ 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,/*111*/
 /*112*/2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0 }/*127*/;
 
-
+// 8 9 10 wurden hinzugefügt wegen der zusatzaufgabe Klammern
 
 /* 0 == Sonderzeichen
  * 1 == Ziffern
@@ -74,28 +67,11 @@ static char vZKl[128] =
  * 8 == '('
  * 9 == ')'
  * 10== '*'
+ * 12== Müllzustand
  */
 
 /* Automatentabelle */
 
-
-////vSMatrix[Zustand][Gelesenes Zeichen] [nähster Zustand, Funktion]
-//tState vSMatrix[9][8][2] ={
-///*          So           Zi          Bu            ':'           '='           '<'          '>'           Space
-///*-----------------------------------------------------------------------------------------------------------------*/
-///* Z0 */ {{9 , ifslb}, {1 , ifsl},  {2 , ifgl},   {3, ifsl},   {9, ifslb },   {4, ifsl},    {5, ifsl},    {0, ifl}} ,
-///* Z1 */ {{9 , ifb},   {1 , ifsl},  {9 , ifb},    {9, ifb},    {9, ifb},      {9, ifb},     {9, ifb},     {9, ifb}} ,
-///* Z2 */ {{9 , ifb},   {2 , ifsl},  {2 , ifgl},   {9 , ifb},   {9 , ifb},     {9 , ifb},    {9 , ifb},    {9 , ifb}} ,
-///* Z3 */ {{9 , ifb},   {9 , ifb},   {9 , ifb},    {9 , ifb},   {6 , ifsl},    {9 , ifb},    {9 , ifb},    {9 , ifb}} ,
-///* Z4 */ {{9 , ifb},   {9 , ifb},   {9 , ifb},    {9 , ifb},   {7 , ifsl},    {9 , ifb},    {9 , ifb},    {9 , ifb}} ,
-///* Z5 */ {{9 , ifb},   {9 , ifb},   {9 , ifb},    {9 , ifb},   {8 , ifsl},    {9 , ifb},    {9 , ifb},    {9 , ifb}} ,
-///* Z6 */ {{9 , ifb},   {9 , ifb},   {9 , ifb},    {9 , ifb},   {9 , ifb},     {9 , ifb},    {9 , ifb},    {9 , ifb}} ,
-///* Z7 */ {{9 , ifb},   {9 , ifb},   {9 , ifb},    {9 , ifb},   {9 , ifb},     {9 , ifb},    {9 , ifb},    {9 , ifb}} ,
-///* Z8 */ {{9 , ifb},   {9 , ifb},   {9 , ifb},    {9 , ifb},   {9 , ifb},     {9 , ifb},    {9 , ifb},    {9 , ifb}}
-//};
-
-
-//vSMatrix[Zustand][Gelesenes Zeichen] [nähster Zustand, Funktion]
 tState vSMatrix[13][11][2] ={
 /*          So           Zi          Bu            ':'           '='           '<'          '>'           Space      |    '('             ')'         *
 /*--------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -111,9 +87,8 @@ tState vSMatrix[13][11][2] ={
 /* Z9 */ {{12 , ifb},   {12 , ifb},  {12 , ifb},   {12 , ifb},  {12 , ifb},    {12 , ifb},  {12 , ifb},    {12 , ifb} ,{12 , ifb},  {12 , ifb},   {10,ifel}},
 /*Z10 */ {{10, ifl},    {10, ifl},   {10, ifl},    {10, ifl},   {10, ifl},     {10, ifl},   {10, ifl},     {10, ifl}  ,{10,ifl},    {10, ifl} ,   {11,ifl}},
 /*Z11 */ {{10, ifl},    {10, ifl},   {10, ifl},    {10, ifl},   {10, ifl},     {10, ifl},   {10, ifl},     {10, ifl}  ,{10,ifl},    {0, ifl}  ,   {12,ifl}}
-
+// 9, 10 und 11 neu wegen Klammern
 };
-
 /*
 Schreiben, lesen, beenden       void fslb(void);
 Schreiben, lesen                void fsl(void);
@@ -131,31 +106,6 @@ int findWord(char* val, const char** keyw, int length){
     }
     return -1;
 }
-
-/*
-int binary_search(const char** M, int n, const char* X) //(Array mit Schlüsselwörtern, Anzahl Schlüsselwörter, Gesuchter Wert)
-{
-
-    unsigned mitte;
-    unsigned links = 0;                                 // Mann beginnt mit dem kleinsten Index
-    unsigned rechts = n - 1;
-    int ret = -1;
-    int bool;
-    do
-    {
-        if (n <= 0) break;
-        mitte = links + ((rechts - links) / 2);         // Bereich halbieren
-        if (rechts < links) break;                      // alles wurde durchsucht, X nicht gefunden
-        bool = strcmp(M[mitte], X);
-        if (bool == 0) ret = mitte; else                // Element X gefunden?
-        if (bool > 0) rechts = mitte; else              // im linken Abschnitt weitersuchen
-            links = mitte + 1;                          // im rechten Abschnitt weitersuchen
-        n = (n) / 2;
-    } while (bool != 0);
-    return ret;
-
-}
-*/
 
 /* Ausgabefunktionen des Automaten */
 static void fl(void)
@@ -182,8 +132,6 @@ static void fb(void)
         case 1:Morph.Val.Num = atol(vBuf);
             Morph.MC = mcNum;
             break;
-
-            //case 2: i = binary_search(Keyw, kn, vBuf);
         case 2: i = findWord(vBuf, Keyw, kn);
             if (i >= 0) {
                 Morph.MC = mcSymb;
@@ -207,13 +155,15 @@ static void fb(void)
         case 8:Morph.Val.Symb = (long)zGE;
             Morph.MC = mcSymb;
             break;
-        case 10: Morph.MC = mcEmpty; // *
-        case 11: // )
+            /* Mal Zeichen */
+        case 10: Morph.MC = mcEmpty;
+            /* Klammer zu Zeichen */
+        case 11:
             break;
 
 
     }
-    Ende = 1; // entfällt bei Variante mit Zustand zEnd
+    Ende = 1;
 };
 
 

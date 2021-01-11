@@ -18,6 +18,7 @@ typedef enum T_ZS
     zERG = 128, zLE, zGE,
     zBGN, zCLL, zCST, zDO, zEND, zIF, zODD, zPRC, zTHN, zVAR, zWHL, zELS
 }tZS;
+// Else hinzugefügt in ENUM
 
 typedef struct
 {

@@ -51,7 +51,6 @@ typedef struct tPROC
 
 tProc* root;
 tProc* procList;
-tBez* suche();
 tVar* CreateVar(void);
 tConst* createConst(int Val);
 tBez* createBez(char* pBez);

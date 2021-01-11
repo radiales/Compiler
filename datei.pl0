@@ -1,12 +1,22 @@
-const z=20,u=16;
-var a,b,Max;(*H*)
+(*Hallo Prof Beck*)
+var a;
+
 procedure p1;
 begin
-  if a>=b then Max:=a
-  else Max:=b;
+   if a>5 then if a>7 then if a>9 then !10
+                                  else if a>8 then !9
+                                              else !8
+                      else if a>6 then !7
+                                  else !6
+          else if a>3 then if a>4 then !5
+                                  else !4
+                      else if a>2 then !3
+                                  else if a>1 then !2
+                                              else !1
 end;
+
+
 begin
-  ?a;?b;
-  call p1;
-  !Max
+   ?a;
+   call p1
 end.

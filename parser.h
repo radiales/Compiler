@@ -2,11 +2,7 @@
 
 #ifndef FINALLEXER_PARSER_H
 #define FINALLEXER_PARSER_H
-
 #endif //FINALLEXER_PARSER_H
-//#include "lex.h"
-
-
 
 typedef enum BOGEN_DESC
 {   BgNl= 0,    // NIL
@@ -45,5 +41,4 @@ extern tBog gBlock[];
 extern tBog gTerm[];
 extern tBog gCondition[];
 extern tBog gStatement[];
-
 typedef unsigned long ul;

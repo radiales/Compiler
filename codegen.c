@@ -11,12 +11,12 @@
 
 long lastjnot;
 long lastjnotparameter;
+fxlist* lastjnotstack;
+fxlist* lastjnotparameterstack;
 FILE* pOFile;
-int IdxProc;
 char* pCode;
 char* vCode;
 int LenCode;
-tProc* pCurrProc;
 tLabl* LabelList;
 int cmpSymb;
 extern tMorph Morph;
@@ -39,40 +39,11 @@ void wr2ToCodeAtP(short x,char*pD)
 
 int CodeOut(void)
 {
-
     unsigned short Len=(unsigned short)(pCode-vCode);
     wr2ToCodeAtP((short)Len,vCode+1);
     wr2ToCodeAtP((short)procList->SpzzVar,vCode+5);
     if (Len==fwrite(vCode,sizeof(char),Len,pOFile)) return OK;
     else                                            return FAIL;
-}
-
-
-int openOFile(char* arg)
-{
-    long  i=0L;
-    char vName[128+1];
-
-    strcpy(vName,arg);
-    if (strstr(vName,".pl0")==NULL) strcat(vName,".cl0");
-    else *(strchr(vName,'.')+1)='c';
-
-    if ((pOFile=fopen(vName,"wb"))!=NULL)
-    {
-        fwrite(&i,sizeof(int32_t),1,pOFile);
-        return OK;
-    }
-    else                                 return FAIL;
-
-}
-
-int closeOFile(void)
-{
-    char vBuf2[2];
-    fseek(pOFile,0,SEEK_SET);
-    wr2ToCodeAtP(procCounter,vBuf2);
-    if (fwrite(vBuf2,2,1,pOFile)==2) return OK;
-    else                             return FAIL;
 }
 
 int code(tCode Code,...)
@@ -88,7 +59,7 @@ int code(tCode Code,...)
         vCode=xCode;
     }
 
-    *pCode++=(char)Code; //TODO: Mistake?
+    *pCode++=(char)Code;
     va_start(ap,Code);
 
     switch (Code)
@@ -126,64 +97,33 @@ int pr1(){
     fwrite(&procCounter,sizeof(int),1,pOFile);
     fseek(pOFile, 0, SEEK_END);
     fwrite(constblock, sizeof(int), constCounter, pOFile);
-
-#ifdef DEBUG_CODEGEN
-    printf("Wrote constants block\n");
-#endif
-
     return 1;
 }
 
 int bl1(){
     NewConstBez(NULL);
-
-#ifdef DEBUG_CODEGEN
-    printf("Created new constant Bezeichner\n");
-#endif
-
     return 1;
 }
 
 int bl2(){
     NewConst();
-
-#ifdef DEBUG_CODEGEN
-    printf("Created new constant description\n");
-#endif
-
     return 1;
 }
 
 int bl3(){
     NewVar();
-
-#ifdef DEBUG_CODEGEN
-    printf("Created new variable description\n");
-#endif
-
     return 1;
 }
 
 int bl4(){
     newProc();
-
-#ifdef DEBUG_CODEGEN
-    printf("Created new procedure description\n");
-#endif
-
     return 1;
 }
 
 int bl5(){
     code(retProc);
-
     CodeOut();
     FreeDescriptions();
-
-#ifdef DEBUG_CODEGEN
-    printf("Wrote procedure\n");
-#endif
-
     return 1;
 }
 
@@ -197,11 +137,6 @@ int bl6(){
 
     pCode = vCode;
     code(entryProc, 0, procList->IdxProc, procList->SpzzVar);
-
-#ifdef DEBUG_CODEGEN
-    printf("Started on procedure\n");
-#endif
-
     return 1;
 }
 
@@ -251,10 +186,40 @@ int st4(){
 
     free(LabelList);
     LabelList = nxt;
-
     wr2ToCodeAtP((short)(pCode - target - 2), (char*)target);
+
+
     lastjnot = target;
     lastjnotparameter = (short)(pCode - target - 2);
+
+
+    if(lastjnotstack == NULL) {
+        lastjnotstack = malloc(sizeof(fxlist));
+        lastjnotstack->instance = target;
+    } else {
+        fxlist* newEntry = malloc(sizeof(fxlist));
+        fxlist* tmp = lastjnotstack;
+        lastjnotstack = newEntry;
+        lastjnotstack->prv = tmp;
+        lastjnotstack->instance = target;
+    }
+
+    if(lastjnotparameterstack == NULL) {
+        lastjnotparameterstack = malloc(sizeof(fxlist));
+        lastjnotparameterstack->instance = target;
+    } else {
+        fxlist* newEntry = malloc(sizeof(fxlist));
+        fxlist* tmp = lastjnotparameterstack;
+        lastjnotparameterstack = newEntry;
+        lastjnotparameterstack->prv = tmp;
+        lastjnotparameterstack->instance = target;
+    }
+
+    lastjnotstack->instance = target;
+    lastjnotparameterstack->instance = (short)(pCode - target - 2);
+
+
+
     return 1;
 }
 
@@ -319,7 +284,7 @@ int st8(){
     return 1;
 }
 
-int st9(){ // TODO: reevaluate
+int st9(){
 
     tBez* tmp = SearchGlobal(Morph.Val.pStr);
 
@@ -351,7 +316,7 @@ int st10(){
     return 1;
 }
 
-int st11(){
+int st11(){ // Neue fkt für else
     code(jmp,0);
 
     tLabl* newLabel = (tLabl*)malloc(sizeof(tLabl));
@@ -372,8 +337,18 @@ int st12(){
     LabelList = nxt;
 
     wr2ToCodeAtP((short)(pCode - target - 2), (char*)target);
+    //wr2ToCodeAtP((short)(lastjnotparameter + 3), (char*)lastjnot);
 
-    wr2ToCodeAtP((short)(lastjnotparameter + 3), (char*)lastjnot);
+    wr2ToCodeAtP((short)((lastjnotparameterstack->instance) + 3), (char*)lastjnotstack->instance);
+
+    fxlist* oldljnps = lastjnotparameterstack;
+    fxlist* oldljns = lastjnotstack;
+
+    lastjnotparameterstack = lastjnotparameterstack->prv;
+    lastjnotstack = lastjnotstack->prv;
+
+    free(oldljnps);
+    free(oldljns);
 
 
     return 1;

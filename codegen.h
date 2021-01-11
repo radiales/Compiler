@@ -9,7 +9,6 @@
 #define ENoMem -2
 
 typedef int tKz;
-extern int IdxProc;
 extern char* pCode;
 extern char* vCode;
 extern int LenCode;;
@@ -19,6 +18,11 @@ typedef struct tLABL{
     long iJmp;
     struct tLABL* nxt;
 }tLabl;
+
+typedef struct fixlist{
+    long instance;
+    struct fixlist* prv;
+}fxlist;
 
 extern tLabl* LabelList;
 

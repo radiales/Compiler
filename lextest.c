@@ -13,8 +13,14 @@ FILE* pOFile;
 int placeholder = 0;
 
 
-int main(int argc, void* argv[])
+int main(int argc, char* argv[])
 {
+
+    if (argc < 2 ){
+        printf("Bitte eine pl0 Datei mit angeben\n");
+        return 1;
+    }
+
     tBez initNameListEntry = {0,NULL,0,NULL,0,NULL};
     currentList = &initNameListEntry;
     tProc rootproc = {0,0,NULL,NULL,0};
@@ -26,7 +32,7 @@ int main(int argc, void* argv[])
 
 
 
-    initLex( (char*) argv[1] );
+    initLex( (char*) argv[1] ); //(f)lexing und parsing
         Lex();
         if (pars(gProg)==1)puts("OK");
         else printf("Syntaxerror near line %d col %d\n",Morph.PosLine+1,Morph.PosCol+1);

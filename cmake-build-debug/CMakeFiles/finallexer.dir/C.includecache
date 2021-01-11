@@ -34,3 +34,19 @@ stdlib.h
 lex.h
 /home/radiales/CLionProjects/finallexer/lex.h
 
+/home/radiales/CLionProjects/finallexer/parser.c
+lex.h
+/home/radiales/CLionProjects/finallexer/lex.h
+parser.h
+/home/radiales/CLionProjects/finallexer/parser.h
+stdio.h
+/home/radiales/CLionProjects/finallexer/stdio.h
+stdlib.h
+/home/radiales/CLionProjects/finallexer/stdlib.h
+namensliste.h
+/home/radiales/CLionProjects/finallexer/namensliste.h
+codegen.h
+/home/radiales/CLionProjects/finallexer/codegen.h
+
+/home/radiales/CLionProjects/finallexer/parser.h
+
